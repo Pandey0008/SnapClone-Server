@@ -34,26 +34,30 @@ export const googleLogin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
+    // FIX: Use same payload shape as regular login ({ userId } not { id })
+    // FIX: Return key as `accessToken` to match what the frontend expects
+    const accessToken = jwt.sign(
+      { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
     res.json({
       message: "Google login success",
-      token,
-      user,
+      accessToken,   // ← was `token`, frontend reads `data.accessToken`
+      user: {
+        _id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        avatarUrl: user.avatarUrl
+      }
     });
 
     console.log("Google login successful for user:", email);
 
   } catch (error) {
-
-    res.status(401).json({
-      message: "Google authentication failed",
-    });
-
+    console.error("Google login error:", error);
+    res.status(401).json({ message: "Google authentication failed" });
   }
 };
 

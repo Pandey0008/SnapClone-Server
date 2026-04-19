@@ -9,7 +9,16 @@ export const verifyToken = (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { userId, role }
+
+    // FIX: Handle both token formats:
+    // - Regular login/register uses { userId, role }
+    // - Old Google login tokens used { id } (before the auth.js fix was deployed)
+    // Normalize to always have req.user.userId
+    req.user = {
+      ...decoded,
+      userId: decoded.userId || decoded.id
+    };
+
     next();
   } catch (err) {
     res.status(401).json({ error: 'Invalid token' });
