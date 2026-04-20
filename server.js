@@ -1,6 +1,10 @@
 import http from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
+
+// Load environment variables FIRST before importing anything else
+dotenv.config();
+
 import connectDB from './src/config/database.js';
 import app from './src/app.js';
 
@@ -12,9 +16,15 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 
 // Socket.io Setup
+const allowedOrigins = [
+  "http://localhost:5173",  // Development
+  "http://localhost:3000",  // Local testing
+  process.env.CLIENT_URL    // Production
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true
   }
