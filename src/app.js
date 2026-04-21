@@ -12,6 +12,7 @@ import chatRoutes from './routes/chat.routes.js';
 import usersRoutes from './routes/users.routes.js';
 import uploadRoutes from './routes/upload.routes.js';
 import storyRoutes from "./routes/story.routes.js";
+import snapRoutes from './routes/snap.routes.js';
 import "./utils/storyArchiveCron.js";
 
 const app = express();
@@ -50,5 +51,6 @@ app.use('/api/v1/chat', chatRoutes);
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/upload', uploadRoutes);
 app.use("/api/v1/stories", storyRoutes);
+app.use('/api/v1/snaps', snapRoutes)
 
 export default app;
