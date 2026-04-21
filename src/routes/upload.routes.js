@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-// Protect all upload routes
+// verifyToken all upload routes
 router.use(verifyToken);
 
 // Upload avatar

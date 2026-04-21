@@ -10,7 +10,7 @@ router.use((req, res, next) => {
   next();
 });
 
-// Protected routes (require authentication)
+// verifyTokened routes (require authentication)
 router.get('/conversations', verifyToken, getConversations);
 router.get('/messages/:roomId', verifyToken, getMessages);
 router.post('/messages', verifyToken, (req, res) => {

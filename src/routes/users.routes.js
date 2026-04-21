@@ -11,7 +11,7 @@ import { verifyToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Protected routes
+// verifyTokened routes
 router.get('/search', verifyToken, searchUsers);
 router.get('/all', verifyToken, getAllUsers);
 router.get('/requests', verifyToken, getPendingRequests);

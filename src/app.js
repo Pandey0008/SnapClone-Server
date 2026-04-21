@@ -11,6 +11,8 @@ import authRoutes from './routes/auth.routes.js';
 import chatRoutes from './routes/chat.routes.js';
 import usersRoutes from './routes/users.routes.js';
 import uploadRoutes from './routes/upload.routes.js';
+import storyRoutes from "./routes/story.routes.js";
+import "./utils/storyArchiveCron.js";
 
 const app = express();
 
@@ -47,5 +49,6 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/chat', chatRoutes);
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/upload', uploadRoutes);
+app.use("/api/v1/stories", storyRoutes);
 
 export default app;

@@ -8,9 +8,7 @@ dotenv.config();
 import connectDB from './src/config/database.js';
 import app from './src/app.js';
 
-dotenv.config();
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Create HTTP Server
 const server = http.createServer(app);

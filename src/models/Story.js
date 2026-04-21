@@ -1,13 +1,58 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const StorySchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  mediaUrl: { type: String, required: true },
-  caption: { type: String, maxlength: 150 },
-  viewers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  expiresAt: { type: Date, required: true },
-}, { timestamps: true });
+const storySchema = new mongoose.Schema(
+{
+    user:
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
 
-StorySchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+    media:
+    {
+        url:
+        {
+            type: String,
+            required: true
+        },
 
-export default mongoose.model('Story', StorySchema);
+        public_id:
+        {
+            type: String,
+            required: true
+        }
+    },
+
+    caption:
+    {
+        type: String,
+        default: ""
+    },
+
+    viewers:
+    [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+
+    expiresAt:
+    {
+        type: Date,
+        required: true
+    },
+
+    isArchived:
+    {
+        type: Boolean,
+        default: false
+    }
+
+},
+{
+    timestamps: true
+});
+
+export default mongoose.model("Story", storySchema);

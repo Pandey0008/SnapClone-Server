@@ -17,6 +17,7 @@ cloudinary.config({
  */
 export const uploadToCloudinary = async (fileBuffer, fileName, folder = 'snapclone') => {
   return new Promise((resolve, reject) => {
+    console.log("Uploading file:", fileName);
     const stream = cloudinary.uploader.upload_stream(
       {
         folder,
