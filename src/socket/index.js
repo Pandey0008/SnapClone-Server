@@ -1,5 +1,6 @@
 import { handleChatEvents } from './chat.js';
 import { handleWebRTCEvents } from './webrtc.js';
+import { handleLocationEvents } from './location.js';
 
 // Track online users
 const onlineUsers = new Map(); // userId -> socketId
@@ -25,6 +26,7 @@ const initializeSocket = (io) => {
 
     handleChatEvents(io, socket);
     handleWebRTCEvents(io, socket);
+    handleLocationEvents(io, socket);
 
     socket.on('disconnect', () => {
       console.log(`User disconnected: ${socket.id}`);
