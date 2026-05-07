@@ -15,6 +15,7 @@ import storyRoutes from "./routes/story.routes.js";
 import snapRoutes from './routes/snap.routes.js';
 import "./utils/storyArchiveCron.js";
 import aiRoutes from './routes/ai.routes.js'
+import locationRoutes from "./routes/location.routes.js";
 
 const app = express();
 
@@ -54,5 +55,6 @@ app.use('/api/v1/upload', uploadRoutes);
 app.use("/api/v1/stories", storyRoutes);
 app.use('/api/v1/snaps', snapRoutes)
 app.use('/api/v1/ai', aiRoutes);
+app.use("/api/v1/location", locationRoutes);
 
 export default app;
